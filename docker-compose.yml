@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - ${DB_PORT}:5432
+    networks:
+      - konecta_network
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+
+volumes:
+  postgres-db:
+
+networks:
+  # Defines networks
+  konecta_network:
+    # The name of the network
+    external: true # Specifies that this network has been created externally and not by this file
